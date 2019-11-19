@@ -1,6 +1,10 @@
-const app = require("./src/app")
-const port = 3000
+const app = require("./src/app");
+const port = 3000;
 
-app.listen(port, function() {
-  console.log(`CLIENTES-API is here > ${port}`)
-})
+app.listen(port, (err) => {
+  if (err) {
+    console.log('Servidor não encontrado. Corrige, amiga!');
+  } else {
+    console.log(`CLIENTES-API lindinha na ${port}`)
+  };
+});

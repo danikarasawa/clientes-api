@@ -13,5 +13,5 @@ const ClientesSchema = new mongoose.Schema({
 });
 
 //PODE SER APENAS O MODULE.EXPORTS, A CONST FOI SÓ PARA ILUSTRAR O FLUXO 
-const clientesBD = mongoose.model('Alunas', ClientesSchema);
+const clientesBD = mongoose.model('Clientes', ClientesSchema);
 module.exports = clientesBD;

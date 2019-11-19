@@ -1,43 +1,44 @@
 const Clientes = require('../model/clientes');
-const fs = require('fs');
 
 //POST
 exports.post = (req, res) => {
-    const clientes = new clientesBD(req.body);
-    Clientes.save(function (err) {
+    const clientes = new Clientes(req.body);
+    clientes.save(function (err) {
         if (err) res.status(500).send(err);
-        res.status(201).send(clientes);
-    })
-
+        res.status(201).send({
+            "status": true,
+            "message": 'Novo cliente inserido com sucesso!'
+        });
+    });
 };
 
 //GET
 exports.get = (req, res) => {
-    clientesBD.find(function (err, clientes) {
+    Clientes.find(function (err, clientes) {
         if (err) res.status(500).send(err);
         res.status(200).send(clientes);
     });
 };
 
 exports.getBuy = (req, res) => {
-    clientesBD.find(function (err, clientes) {
+    Clientes.find(function (err, clientes) {
         if (err) res.status(500).send(err);
         const realizouCompra = clientes.filter(item => item.comprou == true);
-        const compradoresLista = realizouCompra.map(item => item.nome && item.email)
-    })
+        const compradoresLista = realizouCompra.map(item => item.nome && item.email);
+
+        res.status(200).send(compradoresLista);
+    });
 };
 
 exports.getByCPF = (req, res) => {
     const clienteCPF = req.params.cpf
-    Clientes.findById(clienteCPF, function (err, clientes) {
-        if (err) return res.status(500).send(err);
-
+    Clientes.find(clienteCPF, function (err, clientes) {
+        
         if (!clientes) {
-            return res.status(200).send({ message: `Infelizmente não localizamos esse cliente: ${clienteCPF}` });
+            return res.status(500).send({ message: `Infelizmente não localizamos esse cliente: ${clienteCPF}` });
+        } else{
+            const compradorCPF = clientes.find(item => item.cpf == cpf);
         }
-        res.status(200).send(clientes)
-    })
+        res.status(200).send(compradorCPF);
+    });
 };
-
-
-
