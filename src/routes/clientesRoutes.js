@@ -6,6 +6,6 @@ router.get("/", controller.get)
 router.get("/compradores", controller.getBuy)
 router.get("/:cpf", controller.getByCPF)
 
-router.post("/", controller.post)
+router.post("/", controller.postClient)
 
 module.exports = router

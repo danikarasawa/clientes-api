@@ -3,7 +3,7 @@ const mongoose = require("mongoose")
 const bodyParser = require("body-parser")
 const app = express()
 
-mongoose.connect("mongodb://localhost:27017/reprograma", {useNewUrlParser: true});
+mongoose.connect("mongodb://localhost:27017/clientes", {useNewUrlParser: true});
 
 let db = mongoose.connection;
 db.on("error", console.log.bind(console, "connection error:"))
@@ -26,6 +26,7 @@ app.use(function(req, res, next) {
 })
 
 app.use(bodyParser.json());
+
 app.use("/", index)
 app.use("/clientes", clientes)
 
