@@ -8,4 +8,6 @@ router.get("/:cpf", controller.getByCPF)
 
 router.post("/", controller.postClient)
 
+router.put("/:cpf", controller.updateCPF)
+
 module.exports = router

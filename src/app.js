@@ -3,7 +3,9 @@ const mongoose = require("mongoose")
 const bodyParser = require("body-parser")
 const app = express()
 
-mongoose.connect("mongodb://localhost:27017/clientes", {useNewUrlParser: true});
+// mongoose.connect("mongodb://localhost:27017/clientes", {useNewUrlParser: true}); // CONEXAO LOCAL 
+
+mongoose.connect("mongodb://admin:reprograma1@ds225902.mlab.com:25902/reprogramameli", {useNewUrlParser: true}); // CONEXAO NA NUVEM
 
 let db = mongoose.connection;
 db.on("error", console.log.bind(console, "connection error:"))

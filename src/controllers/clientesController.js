@@ -63,8 +63,25 @@ exports.getBuy = (req, res) => {
 
 exports.getByCPF = (req, res) => {
     const cpf = req.params.cpf
-    Clientes.find({ cpf }, function (err, clientes) {        
+    Clientes.find({ cpf }, function (err, clientes) {
         if (err) res.status(500).send({ message: `Infelizmente não localizamos esse cliente: ${cpf}` });
-            res.status(200).send(clientes);
-        }) 
-    };
+        res.status(200).send(clientes);
+    })
+};
+
+exports.updateCPF = (req, res) => {
+    Clientes.update(
+        { cpf: req.params.cpf },
+        { $set: req.body },
+        { upsert: true },
+        function (err) {
+            if (err) return res.status(500).send({ message: err });
+            res.status(200).send({ message: "Atualizado com sucesso!" });
+        })
+        };
+
+        //OUTRA FORMA DE DECLARAR
+        // const cpf = req.params.cpf
+        // Clientes.update(
+        //     {cpf}...
+        // )
