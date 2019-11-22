@@ -10,4 +10,6 @@ router.post("/", controller.postClient)
 
 router.put("/:cpf", controller.updateCPF)
 
+router.delete("/:id", controller.removeID)
+
 module.exports = router

@@ -70,6 +70,7 @@ exports.getByCPF = (req, res) => {
 };
 
 exports.updateCPF = (req, res) => {
+    if (!validaFormulario(req.body)) return res.status(400).send({ message: "Campos inválidos" });
     Clientes.update(
         { cpf: req.params.cpf },
         { $set: req.body },
@@ -78,10 +79,39 @@ exports.updateCPF = (req, res) => {
             if (err) return res.status(500).send({ message: err });
             res.status(200).send({ message: "Atualizado com sucesso!" });
         })
-        };
+};
 
-        //OUTRA FORMA DE DECLARAR
-        // const cpf = req.params.cpf
-        // Clientes.update(
-        //     {cpf}...
-        // )
+exports.removeID = (req, res) => {
+    const cpfCliente = req.params.cpf;
+
+    Clientes.find(cpfCliente, function (err, cliente) {
+        if (err) return res.status(500).send(err);
+        if (!cliente) {
+            return res.status(200).send({ message: `Infelizmente o CPF ${cpfCliente} não consta em nosso grupo de clientes` })
+        }
+        cliente.remove(function (err) {
+            if (!err) {
+                res.status(204).send({ message: "Aluna removida com sucesso" }); //204 É UMA AÇÃO SEM INFORMAÇÃO - A AÇÃO FOI CONCLUÍDA COM SUCESSO, MAS NÃO RETORNOU INFORMAÇÃO 
+            }
+        })
+    })
+};
+
+//OUTRA FORMA DE DECLARAR
+// const cpf = req.params.cpf
+// Clientes.update(
+//     {cpf}...
+// )
+
+//VALIDACAO
+const validaFormulario = (campos) => {
+    const schema = {
+        nome: Joi.string().min(1).required(),
+        email: Joi.string().min(1).required(),
+    }
+    const validation = Joi.validate(campos, schema);
+    if (validation.error) {
+        return false;
+    }
+    return true;
+}
