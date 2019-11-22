@@ -1,0 +1,13 @@
+find - retorna array de objetos 
+[{...}, {...}]
+
+se não encontra retorna um [ ]
+
+findById - {} ou null quando não encontra nada (!parametro)
+
+Clientes.find({cpf}, function (err, cliente){
+    if(!cliente) (cliente.length == 0) > opção para o MongoDB
+    res.status(200).send({message: "Não tem o cliente"});
+
+})
+
