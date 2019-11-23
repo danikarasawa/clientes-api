@@ -14,7 +14,7 @@ exports.postClient = (req, res) => {
 
 //GET
 exports.get = (req, res) => {
-    Clientes.find(function (err, clientes) {
+    Clientes.find(function (err, clientes) { //findOne é equivalente ao findById
         if (err) res.status(500).send(err);
         res.status(200).send(clientes);
     });

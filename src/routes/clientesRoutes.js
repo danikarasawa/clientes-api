@@ -3,6 +3,13 @@ const router = express.Router()
 const controller = require("../controllers/clientesController")
 
 router.get("/", controller.get)
+
+/**
+ * @api {get} /clientes
+ * @apiGroup Clientes
+ * *
+ * @apiSuccess {Object []}
+*/
 router.get("/compradores", controller.getBuy)
 router.get("/:cpf", controller.getByCPF)
 

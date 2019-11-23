@@ -5,7 +5,10 @@ const app = express()
 
 // mongoose.connect("mongodb://localhost:27017/clientes", {useNewUrlParser: true}); // CONEXAO LOCAL 
 
-mongoose.connect("mongodb://admin:reprograma1@ds225902.mlab.com:25902/reprogramameli", {useNewUrlParser: true}); // CONEXAO NA NUVEM
+//mongoose.connect("mongodb://admin:reprograma1@ds225902.mlab.com:25902/reprogramameli", {useNewUrlParser: true}); // CONEXAO NA NUVEM
+//mongoose.connect("mongodb+srv://admin:admin123@reprograma-xazlh.mongodb.net/clientes", {useNewUrlParser: true});
+
+mongoose.connect("mongodb+srv://admin:Admin2405@cluster0-dnqcd.mongodb.net/clientes", {useNewUrlParser: true}); //MEU CLUSTER NO MONGO ATLAS
 
 let db = mongoose.connection;
 db.on("error", console.log.bind(console, "connection error:"))
