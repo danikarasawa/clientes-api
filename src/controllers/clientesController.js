@@ -1,16 +1,29 @@
 const Clientes = require('../model/clientes');
+const bcrypt = require("bcryptjs");
+const bcryptSalt = 8;
 
 //POST
-exports.postClient = (req, res) => {
-    const clientes = new Clientes(req.body);
-    clientes.save(function (err) {
-        if (err) res.status(500).send("O que está errado, não está certo");
-        res.status(201).send({
-            status: true,
-            message: 'Novo cliente inserido com sucesso!'
-        });
-    });
-};
+
+exports.postClient = async (req, res) => { 
+    const { nome, email, cpf, password, dataNascimento, estadoCivil, telefone, comprou } = req.body;
+    const salt = bcrypt.genSaltSync(bcryptSalt);
+    try {
+      const hashPass = await bcrypt.hashSync(password, salt);
+      Clientes.push({ nome, email, cpf, hashPass, dataNascimento, estadoCivil, telefone, comprou });
+    
+      fs.writeFile("./src/model/clientes", JSON.stringify(Clientes), 'utf8', function (err) {
+        if (err) {
+          return res.status(500).send({ message: err });
+        }
+        console.log("The file was saved!");
+      }); 
+      return res.status(201).send(Clientes); 
+    } catch (e) {
+      return res.status(401).json({ error: 'erro' });
+    }
+  }
+
+  
 
 //GET
 exports.get = (req, res) => {
