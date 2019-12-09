@@ -10,4 +10,3 @@ Clientes.find({cpf}, function (err, cliente){
     res.status(200).send({message: "Não tem o cliente"});
 
 })
-

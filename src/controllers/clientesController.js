@@ -23,7 +23,7 @@ exports.postClient = async (req, res) => {
     }
   }
 
-  
+
 
 //GET
 exports.get = (req, res) => {
